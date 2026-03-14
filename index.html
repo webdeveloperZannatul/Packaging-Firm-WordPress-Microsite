@@ -1,0 +1,765 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SealTech Industrial | Precision Hardware Packaging Solutions</title>
+    <meta name="description" content="Professional heat-sealed polybag packaging for nuts, bolts, screws and hardware kits. OEM and distributor services.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',   // Dark Blue
+                            steel: '#475569',  // Steel Gray
+                            accent: '#f97316', // Orange Accent
+                            light: '#f8fafc',  // White/Light Background
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to right, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.4)), url('https://www.newstreaming.com/wp-content/uploads/2024/02/Close-up-of-gloved-hand-performing-kitting-scaled.jpg?q=80&w=2071&auto=format&fit=crop')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0f172a;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation Utilities */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom-container img {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom-container:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Loader for form */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #f97316;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 1s linear infinite; /* Safari */
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-700 antialiased bg-brand-light flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <header id="navbar" class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-brand-dark text-white flex items-center justify-center rounded-sm">
+                        <i class="fa-solid fa-box-open text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-display font-bold text-2xl text-brand-dark tracking-wide">SEALTECH</h1>
+                        <p class="text-xs text-brand-steel uppercase tracking-widest -mt-1">Industrial Packaging</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-brand-steel hover:text-brand-accent font-medium transition-colors">Home</a>
+                    <a href="#about" class="text-brand-steel hover:text-brand-accent font-medium transition-colors">About & Capabilities</a>
+                    <a href="#contact" class="text-brand-steel hover:text-brand-accent font-medium transition-colors">Contact</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-brand-accent hover:bg-orange-600 text-white px-6 py-2.5 rounded-sm font-medium transition-colors shadow-md hover:shadow-lg">
+                        Get a Quote
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-brand-dark hover:text-brand-accent focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-1 shadow-lg">
+                <a href="#home" class="block px-3 py-3 text-base font-medium text-brand-dark hover:bg-gray-50 hover:text-brand-accent rounded-md">Home</a>
+                <a href="#about" class="block px-3 py-3 text-base font-medium text-brand-dark hover:bg-gray-50 hover:text-brand-accent rounded-md">About & Capabilities</a>
+                <a href="#contact" class="block px-3 py-3 text-base font-medium text-brand-dark hover:bg-gray-50 hover:text-brand-accent rounded-md">Contact</a>
+                <a href="#contact" class="block w-full text-center mt-4 bg-brand-accent text-white px-6 py-3 rounded-sm font-medium">Request a Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-15">
+
+        <!-- PAGE 1: HOME -->
+        <section id="home" class="relative">
+            
+            <!-- Hero Section -->
+            <div class="relative h-[85vh] bg-hero-pattern bg-cover bg-center bg-fixed bg-no-repeat flex items-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                    <div class="max-w-3xl fade-in-up">
+                        <div class="inline-block bg-brand-accent/90 text-white px-4 py-1 mb-6 text-sm font-semibold uppercase tracking-wider rounded-sm">
+                            OEM & Distributor Specialists
+                        </div>
+                        <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight shadow-sm">
+                            Reliable Hardware Kit Packaging
+                        </h1>
+                        <p class="text-xl text-gray-200 mb-8 font-light leading-relaxed max-w-2xl">
+                            Precision sorting, kitting, and heat-sealed polybag solutions for the manufacturing industry. We ensure your components arrive organized, protected, and ready for assembly.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#contact" class="bg-brand-accent hover:bg-orange-600 text-white text-center px-8 py-4 rounded-sm font-semibold text-lg transition-all shadow-lg hover:shadow-orange-500/30 transform hover:-translate-y-1">
+                                Request a Quote
+                            </a>
+                            <a href="#about" class="bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white/20 text-white text-center px-8 py-4 rounded-sm font-semibold text-lg transition-all">
+                                View Capabilities
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scroll Down Indicator -->
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white/70">
+                    <i class="fa-solid fa-chevron-down text-2xl"></i>
+                </div>
+            </div>
+
+            <!-- Intro Section -->
+            <div class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="fade-in-up">
+                            <h2 class="text-brand-accent font-bold uppercase tracking-wide mb-2">About Us</h2>
+                            <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-6">Packaging Precision for the Manufacturing World</h3>
+                            <p class="text-brand-steel mb-6 leading-relaxed">
+                                At SealTech Industrial, we understand that assembly lines depend on accuracy. For over a decade, we have partnered with OEMs and industrial distributors to provide meticulous packaging solutions for small hardware components.
+                            </p>
+                            <p class="text-brand-steel mb-8 leading-relaxed">
+                                From standard nuts and bolts to complex custom kits, our automated and manual sorting processes ensure every bag contains exactly what your production line needs.
+                            </p>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-brand-dark">
+                                        <i class="fa-solid fa-check-double text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-brand-dark">100% Accuracy</h4>
+                                        <p class="text-sm text-brand-steel">Verified Counting</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-brand-accent">
+                                        <i class="fa-solid fa-stopwatch text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-brand-dark">Fast Turnaround</h4>
+                                        <p class="text-sm text-brand-steel">Rush Orders Available</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative fade-in-up delay-200">
+                            <div class="absolute -top-4 -left-4 w-24 h-24 bg-brand-accent/10 rounded-full z-0"></div>
+                            <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-brand-dark/5 rounded-full z-0"></div>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7TptB-qCrubx0A7nSc8yJpHwCg6lOrLYQfg&s?q=80&w=2070&auto=format&fit=crop" alt="Industrial Packaging Machinery" class="relative z-10 rounded-sm shadow-2xl w-full object-cover h-[500px]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Overview -->
+            <div class="py-20 bg-slate-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16 fade-in-up">
+                        <h2 class="text-brand-accent font-bold uppercase tracking-wide mb-2">Our Services</h2>
+                        <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark">Comprehensive Packaging Solutions</h3>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Service 1 -->
+                        <div class="bg-white p-8 rounded-sm shadow-md hover:shadow-xl transition-shadow border-t-4 border-brand-dark fade-in-up group">
+                            <div class="w-16 h-16 bg-slate-100 rounded-sm flex items-center justify-center mb-6 group-hover:bg-brand-dark transition-colors duration-300">
+                                <i class="fa-solid fa-filter text-2xl text-brand-dark group-hover:text-white transition-colors"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-brand-dark mb-3">Sorting & Kitting</h4>
+                            <p class="text-brand-steel leading-relaxed">
+                                Automated and manual sorting of mixed hardware into specific kits. We handle nuts, bolts, washers, and specialized fasteners.
+                            </p>
+                        </div>
+
+                        <!-- Service 2 -->
+                        <div class="bg-white p-8 rounded-sm shadow-md hover:shadow-xl transition-shadow border-t-4 border-brand-accent fade-in-up delay-100 group">
+                            <div class="w-16 h-16 bg-orange-50 rounded-sm flex items-center justify-center mb-6 group-hover:bg-brand-accent transition-colors duration-300">
+                                <i class="fa-solid fa-fire-flame-simple text-2xl text-brand-accent group-hover:text-white transition-colors"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-brand-dark mb-3">Heat-Sealed Polybags</h4>
+                            <p class="text-brand-steel leading-relaxed">
+                                Durable, transparent polyethylene bags sealed with high-heat machinery to protect contents from moisture and contamination.
+                            </p>
+                        </div>
+
+                        <!-- Service 3 -->
+                        <div class="bg-white p-8 rounded-sm shadow-md hover:shadow-xl transition-shadow border-t-4 border-brand-steel fade-in-up delay-200 group">
+                            <div class="w-16 h-16 bg-slate-100 rounded-sm flex items-center justify-center mb-6 group-hover:bg-brand-steel transition-colors duration-300">
+                                <i class="fa-solid fa-tags text-2xl text-brand-steel group-hover:text-white transition-colors"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-brand-dark mb-3">Labeling & Branding</h4>
+                            <p class="text-brand-steel leading-relaxed">
+                                Custom printed labels with barcodes, part numbers, and your company logo. Clear, professional packaging ready for retail or industrial use.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Section -->
+            <div class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-12 fade-in-up">
+                        <div>
+                            <h2 class="text-brand-accent font-bold uppercase tracking-wide mb-2">Portfolio</h2>
+                            <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark">Our Work in Detail</h3>
+                        </div>
+                        <a href="#contact" class="hidden md:inline-block text-brand-accent font-semibold hover:text-brand-dark transition-colors mt-4 md:mt-0">
+                            Start Your Project <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-auto md:h-[600px]">
+                        <!-- Large Item -->
+                        <div class="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-sm cursor-pointer fade-in-up" onclick="openLightbox(this)">
+                            <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop" alt="Organized Hardware Kits" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                <h4 class="text-white font-bold text-xl">Assembly Kits</h4>
+                                <p class="text-gray-300 text-sm">Custom sorted for furniture manufacturers</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Small Item 1 -->
+                        <div class="relative group overflow-hidden rounded-sm cursor-pointer fade-in-up delay-100 h-64 md:h-auto" onclick="openLightbox(this)">
+                            <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=2070&auto=format&fit=crop" alt="Screws and Bolts" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <i class="fa-solid fa-magnifying-glass-plus text-white text-3xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Small Item 2 -->
+                        <div class="relative group overflow-hidden rounded-sm cursor-pointer fade-in-up delay-200 h-64 md:h-auto" onclick="openLightbox(this)">
+                            <img src="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?q=80&w=2080&auto=format&fit=crop" alt="Packaging Process" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <i class="fa-solid fa-magnifying-glass-plus text-white text-3xl"></i>
+                            </div>
+                        </div>
+
+                        <!-- Wide Item Bottom -->
+                        <div class="lg:col-span-2 relative group overflow-hidden rounded-sm cursor-pointer fade-in-up delay-300 h-64 md:h-auto" onclick="openLightbox(this)">
+                            <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2070&auto=format&fit=crop" alt="Heat Sealing Machine" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                <h4 class="text-white font-bold text-xl">Industrial Sealing</h4>
+                                <p class="text-gray-300 text-sm">High-volume heat sealing capabilities</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits -->
+            <div class="py-20 bg-brand-dark text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div class="fade-in-up">
+                            <h2 class="text-brand-accent font-bold uppercase tracking-wide mb-2">Why Partner With Us?</h2>
+                            <h3 class="text-3xl md:text-4xl font-display font-bold mb-8">Efficiency You Can Count On</h3>
+                            
+                            <ul class="space-y-6">
+                                <li class="flex items-start gap-4">
+                                    <div class="mt-1 bg-brand-accent/20 p-2 rounded-full text-brand-accent">
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold mb-2">Reduced Inventory Loss</h4>
+                                        <p class="text-slate-400">Accurate counts mean you never pay for missing parts or halt production due to kit shortages.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="mt-1 bg-brand-accent/20 p-2 rounded-full text-brand-accent">
+                                        <i class="fa-solid fa-truck-fast"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold mb-2">Scalable Fulfillment</h4>
+                                        <p class="text-slate-400">Whether you need 100 kits or 100,000, our automated lines scale to meet tight deadlines.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-4">
+                                    <div class="mt-1 bg-brand-accent/20 p-2 rounded-full text-brand-accent">
+                                        <i class="fa-solid fa-clipboard-check"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-bold mb-2">Quality Assurance</h4>
+                                        <p class="text-slate-400">Every batch undergoes rigorous QC checks to ensure polybag integrity and content accuracy.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="relative fade-in-up delay-200">
+                             <div class="bg-white p-2 rounded-sm rotate-2 shadow-2xl">
+                                <img src="https://www.ecotileflooring.com/assets/uploads/2018/08/20171105_090503_resized.jpg?q=80&w=2070&auto=format&fit=crop" alt="Factory Floor" class="w-full rounded-sm filter grayscale hover:grayscale-0 transition-all duration-500">
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: ABOUT / CAPABILITIES -->
+        <section id="about" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                    <h2 class="text-brand-accent font-bold uppercase tracking-wide mb-2">Our Story</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark mb-6">History & Capabilities</h3>
+                    <p class="text-brand-steel text-lg">
+                        Founded in 2010, SealTech Industrial began with a single vision: to eliminate the packaging bottleneck for hardware manufacturers. What started as a small manual sorting facility has grown into a state-of-the-art packaging operation serving the entire Midwest.
+                    </p>
+                </div>
+
+                <!-- Mission & Values -->
+                <div class="grid md:grid-cols-3 gap-8 mb-20">
+                    <div class="text-center p-6 border border-slate-100 rounded-sm shadow-sm hover:shadow-md transition-all fade-in-up">
+                        <div class="w-16 h-16 mx-auto bg-blue-50 rounded-full flex items-center justify-center text-brand-dark mb-4">
+                            <i class="fa-solid fa-bullseye text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-brand-dark mb-2">Mission</h4>
+                        <p class="text-brand-steel text-sm">To provide unparalleled reliability and accuracy in hardware packaging, ensuring our clients' supply chains run smoother.</p>
+                    </div>
+                    <div class="text-center p-6 border border-slate-100 rounded-sm shadow-sm hover:shadow-md transition-all fade-in-up delay-100">
+                        <div class="w-16 h-16 mx-auto bg-orange-50 rounded-full flex items-center justify-center text-brand-accent mb-4">
+                            <i class="fa-solid fa-eye text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-brand-dark mb-2">Vision</h4>
+                        <p class="text-brand-steel text-sm">To be the trusted extension of every OEM assembly line, known for zero-defect packaging and transparent communication.</p>
+                    </div>
+                    <div class="text-center p-6 border border-slate-100 rounded-sm shadow-sm hover:shadow-md transition-all fade-in-up delay-200">
+                        <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center text-brand-steel mb-4">
+                            <i class="fa-solid fa-handshake text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-brand-dark mb-2">Values</h4>
+                        <p class="text-brand-steel text-sm">Integrity, Precision, and Partnership. We treat your components with the same care as if they were our own.</p>
+                    </div>
+                </div>
+
+                <!-- Detailed Capabilities -->
+                <div class="bg-slate-50 rounded-xl overflow-hidden shadow-lg">
+                    <div class="grid md:grid-cols-2">
+                        <div class="p-8 md:p-12 flex flex-col justify-center fade-in-up">
+                            <h3 class="text-2xl font-display font-bold text-brand-dark mb-6">Technical Specifications</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-center gap-3 pb-3 border-b border-slate-200">
+                                    <i class="fa-solid fa-check text-brand-accent"></i>
+                                    <span class="font-medium text-brand-dark">Bag Sizes:</span>
+                                    <span class="text-brand-steel text-sm">2" x 3" up to 12" x 15" (Custom sizes available)</span>
+                                </li>
+                                <li class="flex items-center gap-3 pb-3 border-b border-slate-200">
+                                    <i class="fa-solid fa-check text-brand-accent"></i>
+                                    <span class="font-medium text-brand-dark">Materials:</span>
+                                    <span class="text-brand-steel text-sm">LDPE, HDPE, Anti-Static, UV Resistant</span>
+                                </li>
+                                <li class="flex items-center gap-3 pb-3 border-b border-slate-200">
+                                    <i class="fa-solid fa-check text-brand-accent"></i>
+                                    <span class="font-medium text-brand-dark">Quantities:</span>
+                                    <span class="text-brand-steel text-sm">1 unit to 5,000 units per master carton</span>
+                                </li>
+                                <li class="flex items-center gap-3 pb-3 border-b border-slate-200">
+                                    <i class="fa-solid fa-check text-brand-accent"></i>
+                                    <span class="font-medium text-brand-dark">Printing:</span>
+                                    <span class="text-brand-steel text-sm">Up to 4-color process on bag or label</span>
+                                </li>
+                                <li class="flex items-center gap-3 pb-3">
+                                    <i class="fa-solid fa-check text-brand-accent"></i>
+                                    <span class="font-medium text-brand-dark">Turnaround:</span>
+                                    <span class="text-brand-steel text-sm">Standard 5-7 business days, Rush available</span>
+                                </li>
+                            </ul>
+                            <div class="mt-8">
+                                <a href="#contact" class="inline-block border-2 border-brand-dark text-brand-dark px-6 py-3 rounded-sm font-semibold hover:bg-brand-dark hover:text-white transition-colors">
+                                    Download Full Spec Sheet
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative h-64 md:h-auto fade-in-up delay-100">
+                            <img src="https://www.sunygroup.cn/images/Vertical-Food-Packaging-Machine/Manufacturing-plant.webp?q=80&w=2070&auto=format&fit=crop" alt="Factory Machinery" class="absolute inset-0 w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-brand-dark/10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: CONTACT -->
+        <section id="contact" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-brand-accent font-bold uppercase tracking-wide mb-2">Get In Touch</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-dark">Ready to Package?</h3>
+                    <p class="text-brand-steel mt-4 max-w-2xl mx-auto">Tell us about your packaging needs. Our team will respond within 24 hours with a detailed quote.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-12">
+                    <!-- Contact Info -->
+                    <div class="lg:col-span-1 space-y-8 fade-in-up">
+                        <div class="bg-white p-8 rounded-sm shadow-md border-l-4 border-brand-accent">
+                            <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-brand-accent mb-4">
+                                <i class="fa-solid fa-phone text-xl"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-brand-dark mb-2">Phone</h4>
+                            <p class="text-brand-steel mb-1">Main Office:</p>
+                            <a href="tel:+15551234567" class="text-brand-dark font-semibold hover:text-brand-accent transition-colors">(555) 123-4567</a>
+                            <p class="text-brand-steel mt-2 mb-1">Sales Department:</p>
+                            <a href="tel:+15559876543" class="text-brand-dark font-semibold hover:text-brand-accent transition-colors">(555) 987-6543</a>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-sm shadow-md border-l-4 border-brand-steel">
+                            <div class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-brand-steel mb-4">
+                                <i class="fa-solid fa-envelope text-xl"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-brand-dark mb-2">Email</h4>
+                            <p class="text-brand-steel mb-1">General Inquiries:</p>
+                            <a href="mailto:info@sealtech.com" class="text-brand-dark font-semibold hover:text-brand-accent transition-colors">info@sealtech.com</a>
+                            <p class="text-brand-steel mt-2 mb-1">Quotes:</p>
+                            <a href="mailto:sales@sealtech.com" class="text-brand-dark font-semibold hover:text-brand-accent transition-colors">sales@sealtech.com</a>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-sm shadow-md border-l-4 border-brand-dark">
+                            <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-brand-dark mb-4">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-brand-dark mb-2">Location</h4>
+                            <p class="text-brand-steel">
+                                2450 Industrial Parkway West<br>
+                                Building C, Suite 100<br>
+                                Hayward, CA 94545
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form & Map -->
+                    <div class="lg:col-span-2 fade-in-up delay-100">
+                        <div class="bg-white p-8 md:p-10 rounded-sm shadow-lg">
+                            <form id="contactForm" class="space-y-6">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-brand-dark mb-1">Full Name</label>
+                                        <input type="text" id="name" required class="w-full px-4 py-3 rounded-sm border border-slate-300 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-colors bg-slate-50" placeholder="John Doe">
+                                    </div>
+                                    <div>
+                                        <label for="company" class="block text-sm font-medium text-brand-dark mb-1">Company Name</label>
+                                        <input type="text" id="company" class="w-full px-4 py-3 rounded-sm border border-slate-300 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-colors bg-slate-50" placeholder="Acme Manufacturing">
+                                    </div>
+                                </div>
+
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-brand-dark mb-1">Email Address</label>
+                                        <input type="email" id="email" required class="w-full px-4 py-3 rounded-sm border border-slate-300 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-colors bg-slate-50" placeholder="john@example.com">
+                                    </div>
+                                    <div>
+                                        <label for="phone" class="block text-sm font-medium text-brand-dark mb-1">Phone Number</label>
+                                        <input type="tel" id="phone" class="w-full px-4 py-3 rounded-sm border border-slate-300 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-colors bg-slate-50" placeholder="(555) 000-0000">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-brand-dark mb-1">Tell us about your packaging needs</label>
+                                    <textarea id="message" rows="5" required class="w-full px-4 py-3 rounded-sm border border-slate-300 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent outline-none transition-colors bg-slate-50" placeholder="Describe the components, quantities, and any specific requirements..."></textarea>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-4">
+                                    <button type="submit" class="bg-brand-accent hover:bg-orange-600 text-white px-8 py-4 rounded-sm font-bold text-lg transition-all shadow-lg hover:shadow-orange-500/30 w-full md:w-auto flex items-center justify-center gap-2">
+                                        <span>Send Inquiry</span>
+                                        <div class="loader" id="formLoader"></div>
+                                    </button>
+                                    <p id="formStatus" class="text-sm font-medium hidden"></p>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Map Section -->
+                        <div class="mt-8 h-80 w-full rounded-sm overflow-hidden shadow-md border-2 border-white relative group">
+                             <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.799358918727!2d-122.08424968468268!3d37.69945797977592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808f91bb15eb2787%3A0x123456789abcdef!2sIndustrial%20Parkway!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy"
+                                class="grayscale group-hover:grayscale-0 transition-all duration-500"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-brand-accent text-white flex items-center justify-center rounded-sm">
+                            <i class="fa-solid fa-box-open text-sm"></i>
+                        </div>
+                        <h2 class="font-display font-bold text-xl text-white tracking-wide">SEALTECH</h2>
+                    </div>
+                    <p class="text-sm text-slate-400 max-w-sm mb-6">
+                        Precision hardware packaging solutions for OEMs and industrial distributors. Heat-sealed polybags, custom kitting, and reliable fulfillment.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-accent hover:text-white transition-all"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-accent hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-accent hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-brand-accent transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-brand-accent transition-colors">About Us</a></li>
+                        <li><a href="#about" class="hover:text-brand-accent transition-colors">Capabilities</a></li>
+                        <li><a href="#contact" class="hover:text-brand-accent transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Certifications</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-certificate text-brand-accent"></i> ISO 9001:2015</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-leaf text-green-500"></i> Eco-Friendly Options</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-blue-400"></i> Quality Guaranteed</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
+                <p>&copy; 2026 SealTech Industrial Packaging.All rights reserved developed by Zannatul.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-[60] bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white text-4xl hover:text-brand-accent transition-colors focus:outline-none">&times;</button>
+        <img id="lightbox-img" src="" alt="Full size" class="max-h-[90vh] max-w-[90vw] object-contain shadow-2xl rounded-sm transform scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                const icon = btn.querySelector('i');
+                if (menu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                }
+            });
+
+            // Close mobile menu when clicking a link
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                    btn.querySelector('i').classList.remove('fa-xmark');
+                    btn.querySelector('i').classList.add('fa-bars');
+                });
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.replace('bg-white/95', 'bg-white');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.replace('bg-white', 'bg-white/95');
+                }
+            });
+
+            // Scroll Animation (Intersection Observer)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Contact Form Handling
+            const form = document.getElementById('contactForm');
+            const loader = document.getElementById('formLoader');
+            const statusMsg = document.getElementById('formStatus');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('span');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simulate loading
+                btnText.textContent = 'Sending...';
+                loader.style.display = 'block';
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+                setTimeout(() => {
+                    // Success simulation
+                    loader.style.display = 'none';
+                    btnText.textContent = 'Message Sent!';
+                    submitBtn.classList.replace('bg-brand-accent', 'bg-green-600');
+                    submitBtn.classList.replace('hover:bg-orange-600', 'hover:bg-green-700');
+                    
+                    statusMsg.textContent = "Thank you! We'll be in touch shortly.";
+                    statusMsg.classList.remove('hidden', 'text-red-500');
+                    statusMsg.classList.add('text-green-600');
+                    
+                    form.reset();
+
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        btnText.textContent = 'Send Inquiry';
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                        submitBtn.classList.replace('bg-green-600', 'bg-brand-accent');
+                        submitBtn.classList.replace('hover:bg-green-700', 'hover:bg-orange-600');
+                        statusMsg.classList.add('hidden');
+                    }, 3000);
+
+                }, 1500);
+            });
+
+            // Lightbox Logic
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxClose = document.getElementById('lightbox-close');
+
+            window.openLightbox = function(element) {
+                const img = element.querySelector('img');
+                lightboxImg.src = img.src;
+                lightbox.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => {
+                    lightbox.classList.remove('opacity-0');
+                    lightboxImg.classList.remove('scale-95');
+                    lightboxImg.classList.add('scale-100');
+                }, 10);
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            };
+
+            function closeLightbox() {
+                lightbox.classList.add('opacity-0');
+                lightboxImg.classList.remove('scale-100');
+                lightboxImg.classList.add('scale-95');
+                setTimeout(() => {
+                    lightbox.classList.add('hidden');
+                    lightboxImg.src = '';
+                }, 300);
+                document.body.style.overflow = 'auto';
+            }
+
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) closeLightbox();
+            });
+        });
+    </script>
+</body>
+</html>
+```
